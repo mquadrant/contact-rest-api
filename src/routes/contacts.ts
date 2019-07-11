@@ -2,24 +2,25 @@ import { Router } from "express";
 const {
   getContacts,
   getBlockedContacts,
-  getContact
+  getContact,
+  CreateContact
 } = require("../controllers/index");
 var router = Router();
 
 router.get("/", function(_req, res, _next) {
   res.status(200).json({ message: "All is well" });
 });
-/* GET contacts listing. */
+/* GET CONTACTS LISTING */
 router.get("/contacts", function(_req, res) {
   const contacts = getContacts();
   res.status(200).json({ data: contacts });
 });
-/* GET blocked contacts */
+/* GET BLOCKED CONTACTS */
 router.get("/contacts/blocked", function(_req, res) {
   const contacts = getBlockedContacts();
   res.status(200).json({ data: contacts });
 });
-/* GET specific contact by ID */
+/* GET SPECIFIC CONTACT BY ID */
 router.get("/contact/:contactId", function(_req, res) {
   try {
     const data = getContact(_req.params.contactId);
@@ -29,23 +30,21 @@ router.get("/contact/:contactId", function(_req, res) {
   }
 });
 
-/* ADD contact*/
-router.post("/contacts", function(_req, res) {
-  const response = {
-    first_name: _req.body.first_name,
-    last_name: _req.body.last_name,
-    phone: _req.body.phone,
-    email: _req.body.email,
-    str_address: _req.body.str_address,
-    gender: _req.body.gender,
-    company_name: _req.body.company_name
-  };
-
-  res.status(200).json({ response });
+/* ADD CONTACT*/
+router.post("/contact", function(req, res) {
+  const contact = new CreateContact(req.body);
+  contact
+    .save()
+    .then((contact: any) => {
+      res.status(201).json({ date: contact });
+    })
+    .catch((_err: any) => {
+      res.status(400).send("unable to save to database");
+    });
 });
 
-/* UNBLOCK contact by ID */
-router.post("/contact/:contactId/unblock", function(_req, res) {
+/* UNBLOCK CONTACT BY ID */
+router.put("/contact/:contactId/unblock", function(_req, res) {
   try {
     const data = getContact(_req.params.contactId);
     res.status(200).json({ data });
