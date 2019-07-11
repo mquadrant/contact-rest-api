@@ -13,13 +13,16 @@ function getBlockedContacts() {
   );
   return blockContact;
 }
-function getContact(contactID: number) {
-  const contact = contacts.filter((contact: any) => contact.id === contactID);
+function getContact(contactID: string) {
+  const contact = contacts.filter(
+    (contact: any) => contact.id === parseInt(contactID)
+  );
   if (!contact.length) {
     throw new Error("Contact not found");
   }
   return contact[0];
 }
+
 exports.getContacts = getContacts;
 exports.getBlockedContacts = getBlockedContacts;
 exports.getContact = getContact;
