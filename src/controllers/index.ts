@@ -16,7 +16,7 @@ function getBlockedContacts() {
 }
 function getContact(contactID: string) {
   const contact = contacts.filter(
-    (contact: any) => contact.id === parseInt(contactID)
+    (contact: any) => contact.id === contactID && !contact.isBlocked
   );
   if (!contact.length) {
     throw new Error("Contact not found");
@@ -42,17 +42,17 @@ class CreateContact {
   str_address: string;
   gender: string;
   company_name: string;
-  date: Date;
+  created: Date;
   constructor(contact: IContact) {
     this.first_name = contact.first_name;
-    this.last_name = contact.first_name;
-    this.phone = contact.first_name;
-    this.email = contact.first_name;
-    this.str_address = contact.first_name;
-    this.gender = contact.first_name;
+    this.last_name = contact.last_name;
+    this.phone = contact.phone;
+    this.email = contact.email;
+    this.str_address = contact.str_address;
+    this.gender = contact.gender;
     this.company_name = contact.company_name;
     this.id = uuidv1();
-    this.date = new Date();
+    this.created = new Date();
   }
   save() {
     contacts.push({
@@ -64,13 +64,22 @@ class CreateContact {
       address: this.str_address,
       gender: this.gender,
       company_name: this.company_name,
-      date: this.date,
-      isBlocked: false
+      isBlocked: false,
+      created: this.created
     });
+    return Promise.resolve(getContact(this.id));
   }
+}
+
+function unBlockContact(contactID: string) {
+  const contactId = contacts.findIndex(
+    (contact: any) => contact.id === contactID
+  );
+  contacts[contactId].isBlocked = false;
 }
 
 exports.getContacts = getContacts;
 exports.getBlockedContacts = getBlockedContacts;
 exports.getContact = getContact;
 exports.CreateContact = CreateContact;
+exports.unBlockContact = unBlockContact;
