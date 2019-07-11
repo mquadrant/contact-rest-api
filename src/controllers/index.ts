@@ -56,7 +56,7 @@ class CreateContact {
   }
   save() {
     contacts.push({
-      id: this.id = uuidv1(),
+      id: this.id,
       first_name: this.first_name,
       last_name: this.last_name,
       phone: this.phone,
@@ -64,7 +64,8 @@ class CreateContact {
       address: this.str_address,
       gender: this.gender,
       company_name: this.company_name,
-      date: this.date
+      date: this.date,
+      isBlocked: false
     });
   }
 }
