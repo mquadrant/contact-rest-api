@@ -1,5 +1,6 @@
 "use strict";
 const contacts = require("../../data/contacts.json");
+const uuidv1 = require("uuid/v1");
 
 function getContacts() {
   const unblockContact = contacts.filter(
@@ -33,6 +34,7 @@ interface IContact {
   company_name: string;
 }
 class CreateContact {
+  id: string;
   first_name: string;
   last_name: string;
   phone: string;
@@ -40,6 +42,7 @@ class CreateContact {
   str_address: string;
   gender: string;
   company_name: string;
+  date: Date;
   constructor(contact: IContact) {
     this.first_name = contact.first_name;
     this.last_name = contact.first_name;
@@ -48,10 +51,25 @@ class CreateContact {
     this.str_address = contact.first_name;
     this.gender = contact.first_name;
     this.company_name = contact.company_name;
+    this.id = uuidv1();
+    this.date = new Date();
   }
-  save() {}
+  save() {
+    contacts.push({
+      id: this.id = uuidv1(),
+      first_name: this.first_name,
+      last_name: this.last_name,
+      phone: this.phone,
+      email: this.email,
+      address: this.str_address,
+      gender: this.gender,
+      company_name: this.company_name,
+      date: this.date
+    });
+  }
 }
 
 exports.getContacts = getContacts;
 exports.getBlockedContacts = getBlockedContacts;
 exports.getContact = getContact;
+exports.CreateContact = CreateContact;
