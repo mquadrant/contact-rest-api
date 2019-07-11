@@ -5,7 +5,8 @@ const {
   getContact,
   CreateContact,
   unBlockContact,
-  blockContact
+  blockContact,
+  updateContact
 } = require("../controllers/index");
 var router = Router();
 
@@ -59,6 +60,15 @@ router.put("/contact/:contactId/block", function(_req, res) {
   try {
     blockContact(_req.params.contactId);
     res.status(200).send("Contact blocked successfully!");
+  } catch (_e) {
+    res.status(404).json({ error: "An error occured, try again!" });
+  }
+});
+/* UPDATE CONTACT BY ID */
+router.put("/contact/:contactId", function(req, res) {
+  try {
+    const data = updateContact(req.body);
+    res.status(201).json({ data: data });
   } catch (_e) {
     res.status(404).json({ error: "An error occured, try again!" });
   }

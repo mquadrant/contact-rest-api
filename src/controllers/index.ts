@@ -85,6 +85,19 @@ function blockContact(contactID: string) {
   contacts[contactId].isBlocked = true;
   return Promise.resolve(getContact(contactID));
 }
+function updateContact(contactID: string, contact: any) {
+  const contactId = contacts.findIndex(
+    (contact: any) => contact.id === contactID
+  );
+  contacts[contactId].first_name = contact.first_name;
+  contacts[contactId].last_name = contact.last_name;
+  contacts[contactId].phone = contact.phone;
+  contacts[contactId].email = contact.email;
+  contacts[contactId].str_address = contact.str_address;
+  contacts[contactId].gender = contact.gender;
+  contacts[contactId].company_name = contact.company_name;
+  return Promise.resolve(contacts[contactId]);
+}
 
 exports.getContacts = getContacts;
 exports.getBlockedContacts = getBlockedContacts;
@@ -92,3 +105,4 @@ exports.getContact = getContact;
 exports.CreateContact = CreateContact;
 exports.unBlockContact = unBlockContact;
 exports.blockContact = blockContact;
+exports.updateContact = updateContact;
