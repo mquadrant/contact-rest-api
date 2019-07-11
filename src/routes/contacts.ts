@@ -3,7 +3,9 @@ const {
   getContacts,
   getBlockedContacts,
   getContact,
-  CreateContact
+  CreateContact,
+  unBlockContact,
+  blockContact
 } = require("../controllers/index");
 var router = Router();
 
@@ -36,7 +38,7 @@ router.post("/contact", function(req, res) {
   contact
     .save()
     .then((contact: any) => {
-      res.status(201).json({ date: contact });
+      res.status(201).json({ data: contact });
     })
     .catch((_err: any) => {
       res.status(400).send("unable to save to database");
@@ -46,10 +48,19 @@ router.post("/contact", function(req, res) {
 /* UNBLOCK CONTACT BY ID */
 router.put("/contact/:contactId/unblock", function(_req, res) {
   try {
-    const data = getContact(_req.params.contactId);
-    res.status(200).json({ data });
+    unBlockContact(_req.params.contactId);
+    res.status(200).send("Contact unblocked successfully!");
   } catch (_e) {
-    res.status(404).json({ error: "Contact not found" });
+    res.status(404).json({ error: "An error occured, try again!" });
+  }
+});
+/* BLOCK CONTACT BY ID */
+router.put("/contact/:contactId/block", function(_req, res) {
+  try {
+    blockContact(_req.params.contactId);
+    res.status(200).send("Contact blocked successfully!");
+  } catch (_e) {
+    res.status(404).json({ error: "An error occured, try again!" });
   }
 });
 
