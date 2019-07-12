@@ -99,6 +99,14 @@ function updateContact(contactID: string, contact: any) {
   return Promise.resolve(contacts[contactId]);
 }
 
+function deleteContact(contactID: string) {
+  const contactId = contacts.findIndex(
+    (contact: any) => contact.id === contactID
+  );
+  contacts.splice(contactId, 1);
+  return "Successfully deleted";
+}
+
 exports.getContacts = getContacts;
 exports.getBlockedContacts = getBlockedContacts;
 exports.getContact = getContact;
@@ -106,3 +114,4 @@ exports.CreateContact = CreateContact;
 exports.unBlockContact = unBlockContact;
 exports.blockContact = blockContact;
 exports.updateContact = updateContact;
+exports.deleteContact = deleteContact;

@@ -6,7 +6,8 @@ const {
   CreateContact,
   unBlockContact,
   blockContact,
-  updateContact
+  updateContact,
+  deleteContact
 } = require("../controllers/index");
 var router = Router();
 
@@ -56,9 +57,9 @@ router.put("/contact/:contactId/unblock", function(_req, res) {
   }
 });
 /* BLOCK CONTACT BY ID */
-router.put("/contact/:contactId/block", function(_req, res) {
+router.put("/contact/:contactId/block", function(req, res) {
   try {
-    blockContact(_req.params.contactId);
+    blockContact(req.params.contactId);
     res.status(200).send("Contact blocked successfully!");
   } catch (_e) {
     res.status(404).json({ error: "An error occured, try again!" });
@@ -69,6 +70,15 @@ router.put("/contact/:contactId", function(req, res) {
   try {
     const data = updateContact(req.body);
     res.status(201).json({ data: data });
+  } catch (_e) {
+    res.status(404).json({ error: "An error occured, try again!" });
+  }
+});
+/* DELETE BY ID */
+router.delete("/contact/:contactId", function(req, res) {
+  try {
+    const data = deleteContact(req.params.contactId);
+    res.status(200).send(data);
   } catch (_e) {
     res.status(404).json({ error: "An error occured, try again!" });
   }
