@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/jest": "^24.0.15",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
@@ -21,6 +22,7 @@
     "@types/http-errors": "^1.6.1",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.14.12",
+    "@types/uuid": "^3.4.5",
     "husky": "^3.0.0",
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
