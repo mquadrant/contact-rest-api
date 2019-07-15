@@ -5,6 +5,8 @@ import {
     CreateContact,
     unBlockContact,
     blockContact,
+    updateContact,
+    deleteContact,
 } from '../src/controllers/index';
 
 describe('API Controller methods', () => {
@@ -108,5 +110,32 @@ describe('API Controller methods', () => {
         expect(() =>
             blockContact('45745c60-7b1a-11e8-9c9c-2d42116eaa3e')
         ).toThrow('Contact not found');
+    });
+    test('updateContact should block a contact and return contact not found', () => {
+        const contact = updateContact('45745c60-7b1a-11e8-9c9c-2d43331b1a3e', {
+            first_name: 'Hazel',
+            last_name: 'Benjamin',
+            phone: '710-165-5129',
+            email: 'hruilton1@virginia.edu',
+            str_address: '884 Citylord Road',
+            gender: 'Female',
+            company_name: 'Demizz',
+        });
+        expect(contact).resolves.toEqual({
+            id: '45745c60-7b1a-11e8-9c9c-2d43331b1a3e',
+            first_name: 'Hazel',
+            last_name: 'Benjamin',
+            phone: '710-165-5129',
+            email: 'hruilton1@virginia.edu',
+            str_address: '884 Citylord Road',
+            gender: 'Female',
+            company_name: 'Demizz',
+            isBlocked: expect.any(Boolean),
+            created: expect.any(String),
+        });
+    });
+    test('deleteContact should delete a contact', () => {
+        const result = deleteContact('45745c60-7b1a-11e8-9c9c-2d43331b1a3e');
+        expect(result).toBe('Successfully deleted');
     });
 });
