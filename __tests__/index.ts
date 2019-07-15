@@ -4,6 +4,7 @@ import {
     getContact,
     CreateContact,
     unBlockContact,
+    blockContact,
 } from '../src/controllers/index';
 
 describe('API Controller methods', () => {
@@ -102,5 +103,10 @@ describe('API Controller methods', () => {
             phone: expect.any(String),
             str_address: expect.any(String),
         });
+    });
+    test('blockContact should block a contact and return contact not found', () => {
+        expect(() =>
+            blockContact('45745c60-7b1a-11e8-9c9c-2d42116eaa3e')
+        ).toThrow('Contact not found');
     });
 });
