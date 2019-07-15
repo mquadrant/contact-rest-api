@@ -3,6 +3,7 @@ import {
     getBlockedContacts,
     getContact,
     CreateContact,
+    unBlockContact,
 } from '../src/controllers/index';
 
 describe('API Controller methods', () => {
@@ -85,6 +86,21 @@ describe('API Controller methods', () => {
             company_name: 'Quadrangle Inc',
             isBlocked: expect.any(Boolean),
             created: expect.any(String),
+        });
+    });
+    test('unBlockContact should unblock contact and return the contact', () => {
+        const contact = unBlockContact('45745c60-7b1a-11e8-9c9c-2d42116eaa3e');
+        expect(contact).resolves.toEqual({
+            company_name: expect.any(String),
+            created: expect.any(String),
+            email: expect.any(String),
+            first_name: expect.any(String),
+            gender: expect.any(String),
+            id: '45745c60-7b1a-11e8-9c9c-2d42116eaa3e',
+            isBlocked: false,
+            last_name: expect.any(String),
+            phone: expect.any(String),
+            str_address: expect.any(String),
         });
     });
 });
