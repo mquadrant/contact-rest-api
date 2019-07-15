@@ -20,6 +20,7 @@ describe('API Controller methods', () => {
             isBlocked: expect.any(Boolean),
             created: expect.any(String),
         });
+        expect(contacts).toBeInstanceOf(Array);
         //check that the right date format is passed
         expect(isNaN(new Date(contacts[0].created).getDate())).toBeFalsy;
     });
