@@ -130,3 +130,31 @@ describe('GET /api/contact/:contactId', () => {
             });
     });
 });
+
+describe('POST /api/contact', () => {
+    const contact = {
+        first_name: 'Elaine',
+        last_name: 'Baine',
+        phone: '188-617-4792',
+        email: 'ebaine0@skype.com',
+        str_address: '09711 Badeau Place',
+        gender: 'Female',
+        company_name: 'Skibox',
+    };
+    test('that it create the contact', () => {
+        return request(app)
+            .post('/api/contact')
+            .send(contact)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(201)
+            .then(res => {
+                expect(res.body.data).toEqual({
+                    ...contact,
+                    id: expect.any(String),
+                    isBlocked: false,
+                    created: expect.any(String),
+                });
+            });
+    });
+});
