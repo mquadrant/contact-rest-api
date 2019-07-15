@@ -1,5 +1,4 @@
 'use strict';
-// const { contacts } = require('../../data/contacts.json');
 import contacts from '../../data/contacts.json';
 import uuidv1 from 'uuid/v1';
 
