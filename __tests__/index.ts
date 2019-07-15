@@ -1,8 +1,9 @@
 import { getContacts } from '../src/controllers/index';
 
-describe('Get all contacts', () => {
-    test('should return all the contacts', () => {
-        expect(getContacts()).toContainEqual({
+describe('API Controller methods', () => {
+    test('getContacts should return all the contacts', () => {
+        const contacts = getContacts();
+        expect(contacts).toContainEqual({
             id: expect.any(String),
             first_name: expect.any(String),
             last_name: expect.any(String),
@@ -14,5 +15,7 @@ describe('Get all contacts', () => {
             isBlocked: expect.any(Boolean),
             created: expect.any(String),
         });
+        //check that the right date format is passed
+        expect(isNaN(new Date(contacts[0].created).getDate())).toBeFalsy;
     });
 });
