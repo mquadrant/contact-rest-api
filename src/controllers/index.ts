@@ -107,23 +107,3 @@ export function deleteContact(contactID: string) {
     contacts.splice(contactId, 1);
     return 'Successfully deleted';
 }
-
-// exports.getContacts = getContacts;
-// exports.getBlockedContacts = getBlockedContacts;
-// exports.getContact = getContact;
-// exports.CreateContact = CreateContact;
-// exports.unBlockContact = unBlockContact;
-// exports.blockContact = blockContact;
-// exports.updateContact = updateContact;
-// exports.deleteContact = deleteContact;
-
-// export {
-//     getContacts,
-//     getBlockedContacts,
-//     getContact,
-//     CreateContact,
-//     unBlockContact,
-//     blockContact,
-//     updateContact,
-//     deleteContact,
-// };
