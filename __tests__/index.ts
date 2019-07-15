@@ -1,4 +1,8 @@
-import { getContacts, getBlockedContacts } from '../src/controllers/index';
+import {
+    getContacts,
+    getBlockedContacts,
+    getContact,
+} from '../src/controllers/index';
 
 describe('API Controller methods', () => {
     test('getContacts should return all the contacts', () => {
@@ -35,5 +39,27 @@ describe('API Controller methods', () => {
         });
         //check that the right date format is passed
         expect(isNaN(new Date(blockedContacts[0].created).getDate())).toBeFalsy;
+    });
+    test('getContact should return specific contact', () => {
+        const contact = getContact('45745c60-7b1a-11e8-9c9c-2d43331b1a3e');
+        expect(contact).toEqual({
+            id: '45745c60-7b1a-11e8-9c9c-2d43331b1a3e',
+            first_name: 'Hazel',
+            last_name: 'Ruilton',
+            phone: '710-165-5129',
+            email: 'hruilton1@virginia.edu',
+            str_address: '884 Northfield Road',
+            gender: 'Female',
+            company_name: 'Demizz',
+            isBlocked: false,
+            created: '2019-04-18T08:20:48+01:00',
+        });
+        //check that the right date format is passed
+        expect(isNaN(new Date(contact.created).getDate())).toBeFalsy;
+    });
+    test('getContact should return Contact not found when id is not found', () => {
+        expect(() => {
+            getContact('45745c60');
+        }).toThrow('Contact not found');
     });
 });
