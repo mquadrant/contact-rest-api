@@ -1,6 +1,7 @@
 'use strict';
 import contacts from '../../data/contacts.json';
 import uuidv1 from 'uuid/v1';
+import IContact from './interface';
 
 export function getContacts() {
     const unblockContact = contacts.filter(
@@ -24,15 +25,6 @@ export function getContact(contactID: string) {
     return contact[0];
 }
 
-interface IContact {
-    first_name: string;
-    last_name: string;
-    phone: string;
-    email: string;
-    str_address: string;
-    gender: string;
-    company_name: string;
-}
 export class CreateContact {
     id: string;
     first_name: string;

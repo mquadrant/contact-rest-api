@@ -2,6 +2,7 @@ import {
     getContacts,
     getBlockedContacts,
     getContact,
+    CreateContact,
 } from '../src/controllers/index';
 
 describe('API Controller methods', () => {
@@ -61,5 +62,28 @@ describe('API Controller methods', () => {
         expect(() => {
             getContact('45745c60');
         }).toThrow('Contact not found');
+    });
+    test('CreateContact should save the contact and return the contact', () => {
+        const contact = new CreateContact({
+            first_name: 'Benjamin',
+            last_name: 'Mark',
+            phone: '08067140834',
+            email: 'mcgiri@stamford.edu',
+            str_address: '6Ba8 Stamford Circle',
+            gender: 'Male',
+            company_name: 'Quadrangle Inc',
+        }).save();
+        expect(contact).resolves.toEqual({
+            id: expect.any(String),
+            first_name: 'Benjamin',
+            last_name: 'Mark',
+            phone: '08067140834',
+            email: 'mcgiri@stamford.edu',
+            str_address: '6Ba8 Stamford Circle',
+            gender: 'Male',
+            company_name: 'Quadrangle Inc',
+            isBlocked: expect.any(Boolean),
+            created: expect.any(String),
+        });
     });
 });
