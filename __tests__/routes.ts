@@ -227,4 +227,15 @@ describe('PUT api/contact/:contactId', () => {
                 });
             });
     });
+    test('that it returns error when id is wrong', () => {
+        return request(app)
+            .put('/api/contact/4574-2d43331b1a3e')
+            .send(contact)
+            .expect(404)
+            .then(res => {
+                expect(res.body).toEqual({
+                    error: 'An error occured, try again!',
+                });
+            });
+    });
 });
