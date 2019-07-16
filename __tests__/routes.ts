@@ -158,3 +158,16 @@ describe('POST /api/contact', () => {
             });
     });
 });
+
+describe('PUT api/contact/:contactId/unblock', () => {
+    test('that a contact is unblock', () => {
+        return request(app)
+            .put('/api/contact/45745c60-7b1a-11e8-9c9c-2d43331b1a3e/unblock')
+            .expect(200)
+            .then(res => {
+                expect(res.text).toStrictEqual(
+                    'Contact unblocked successfully!'
+                );
+            });
+    });
+});
