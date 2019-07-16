@@ -170,4 +170,14 @@ describe('PUT api/contact/:contactId/unblock', () => {
                 );
             });
     });
+    test('that it return an error message when a wrong id is passed', () => {
+        return request(app)
+            .put('/api/contact/45745c60-7b1a-11/unblock')
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    error: 'An error occured, try again!',
+                });
+            });
+    });
 });
