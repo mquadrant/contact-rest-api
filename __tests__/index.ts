@@ -139,6 +139,6 @@ describe('API Controller methods', () => {
     });
     test('deleteContact should delete a contact', () => {
         const result = deleteContact('45745c60-7b1a-11e8-9c9c-2d43331b1a3e');
-        expect(result).toBe('Successfully deleted');
+        expect(result).resolves.toBe('Successfully deleted');
     });
 });

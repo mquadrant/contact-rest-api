@@ -75,9 +75,9 @@ router.put('/contact/:contactId', async function(req, res) {
     }
 });
 /* DELETE BY ID */
-router.delete('/contact/:contactId', function(req, res) {
+router.delete('/contact/:contactId', async function(req, res) {
     try {
-        const data = deleteContact(req.params.contactId);
+        const data = await deleteContact(req.params.contactId);
         res.status(200).send(data);
     } catch (_e) {
         res.status(404).json({ error: 'An error occured, try again!' });

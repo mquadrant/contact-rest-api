@@ -99,5 +99,5 @@ export function deleteContact(contactID: string) {
         (contact: any) => contact.id === contactID
     );
     contacts.splice(contactId, 1);
-    return 'Successfully deleted';
+    return Promise.resolve('Successfully deleted');
 }

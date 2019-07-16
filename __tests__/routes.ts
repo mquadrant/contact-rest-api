@@ -239,3 +239,14 @@ describe('PUT api/contact/:contactId', () => {
             });
     });
 });
+
+describe('DELETE /api/contact/:contactId', () => {
+    test('that it deletes successfully', () => {
+        return request(app)
+            .delete('/api/contact/:contactId')
+            .expect(200)
+            .then(res => {
+                expect(res.text).toBe('Successfully deleted');
+            });
+    });
+});
