@@ -98,6 +98,9 @@ export function deleteContact(contactID: string) {
     const contactId = contacts.findIndex(
         (contact: any) => contact.id === contactID
     );
-    contacts.splice(contactId, 1);
-    return Promise.resolve('Successfully deleted');
+    if (contactId >= 0) {
+        contacts.splice(contactId, 1);
+        return Promise.resolve('Successfully deleted');
+    }
+    return Promise.reject('Sorry, something went wrong!');
 }

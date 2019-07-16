@@ -243,10 +243,20 @@ describe('PUT api/contact/:contactId', () => {
 describe('DELETE /api/contact/:contactId', () => {
     test('that it deletes successfully', () => {
         return request(app)
-            .delete('/api/contact/:contactId')
+            .delete('/api/contact/45745c60-7b1a-11e8-9c9c-2d43331b1a3e')
             .expect(200)
             .then(res => {
                 expect(res.text).toBe('Successfully deleted');
+            });
+    });
+    test('that it returns error when id is wrong', () => {
+        return request(app)
+            .delete('/api/contact/11e8-9c9c-2d43331b1a3e')
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    error: 'An error occured, try again!',
+                });
             });
     });
 });
