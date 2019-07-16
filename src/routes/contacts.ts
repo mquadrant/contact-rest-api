@@ -57,9 +57,9 @@ router.put('/contact/:contactId/unblock', function(_req, res) {
     }
 });
 /* BLOCK CONTACT BY ID */
-router.put('/contact/:contactId/block', function(req, res) {
+router.put('/contact/:contactId/block', async function(req, res) {
     try {
-        blockContact(req.params.contactId);
+        await blockContact(req.params.contactId);
         res.status(200).send('Contact blocked successfully!');
     } catch (_e) {
         res.status(404).json({ error: 'An error occured, try again!' });

@@ -191,4 +191,14 @@ describe('PUT api/contact/:contactId/block', () => {
                 expect(res.text).toStrictEqual('Contact blocked successfully!');
             });
     });
+    test('that it returns error when wrong id is passed', () => {
+        return request(app)
+            .put('/api/contact/45745c6-wrong-6eaa3e/block')
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    error: 'An error occured, try again!',
+                });
+            });
+    });
 });
