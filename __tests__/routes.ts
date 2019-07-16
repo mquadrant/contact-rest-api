@@ -181,3 +181,14 @@ describe('PUT api/contact/:contactId/unblock', () => {
             });
     });
 });
+
+describe('PUT api/contact/:contactId/block', () => {
+    test('that a contact is block', () => {
+        return request(app)
+            .put('/api/contact/45745c60-7b1a-11e8-9c9c-2d42116eaa3e/block')
+            .expect(200)
+            .then(res => {
+                expect(res.text).toStrictEqual('Contact blocked successfully!');
+            });
+    });
+});

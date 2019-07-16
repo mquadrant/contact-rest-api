@@ -74,8 +74,11 @@ export function blockContact(contactID: string) {
     const contactId = contacts.findIndex(
         (contact: any) => contact.id === contactID
     );
-    contacts[contactId].isBlocked = true;
-    return Promise.resolve(getContact(contactID));
+    if (contactId >= 0) {
+        contacts[contactId].isBlocked = true;
+        return Promise.resolve('Contact blocked successfully!');
+    }
+    return Promise.reject('Sorry, something went wrong!');
 }
 export function updateContact(contactID: string, contact: any) {
     const contactId = contacts.findIndex(
