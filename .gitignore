@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-/node_module
-/dist
-node_modules
-=======
 /node_modules
 /dist
 node_modules
 /coverage
->>>>>>> staging
