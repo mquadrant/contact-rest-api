@@ -202,3 +202,29 @@ describe('PUT api/contact/:contactId/block', () => {
             });
     });
 });
+
+describe('PUT api/contact/:contactId', () => {
+    const contact = {
+        first_name: 'Johnson',
+        last_name: 'Jefferson',
+        phone: '000-1111-222',
+        email: 'cooless0@skype.com',
+        str_address: '020 skimatama street',
+        gender: 'Male',
+        company_name: 'JJ company',
+    };
+    test('that the contact is updated', () => {
+        return request(app)
+            .put('/api/contact/45745c60-7b1a-11e8-9c9c-2d43331b1a3e')
+            .send(contact)
+            .expect(201)
+            .then(res => {
+                expect(res.body.data).toEqual({
+                    ...contact,
+                    id: '45745c60-7b1a-11e8-9c9c-2d43331b1a3e',
+                    isBlocked: false,
+                    created: expect.any(String),
+                });
+            });
+    });
+});

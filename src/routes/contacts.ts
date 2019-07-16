@@ -66,9 +66,9 @@ router.put('/contact/:contactId/block', async function(req, res) {
     }
 });
 /* UPDATE CONTACT BY ID */
-router.put('/contact/:contactId', function(req, res) {
+router.put('/contact/:contactId', async function(req, res) {
     try {
-        const data = updateContact(req.params.contactId, req.body);
+        const data = await updateContact(req.params.contactId, req.body);
         res.status(201).json({ data: data });
     } catch (_e) {
         res.status(404).json({ error: 'An error occured, try again!' });
