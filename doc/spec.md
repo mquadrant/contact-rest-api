@@ -1,26 +1,3 @@
-## To get a Contact
-
-```
-GET: /api/contacts/contactId
-```
-
-status code 200 if the contact is successfully returned.
-
-This returns a json object of the following;
-
-```json
-{
-  "name": "Seun Jayeoba",
-  "email": "seun@gmail.com",
-  "phone": "07063712398",
-  "address": "30, Akingbade street, ketu, Lagos",
-  "organisation": "Decagon Institute",
-  "image": "www.image.com/randomimage/avatar/3"
-}
-```
-
----
-
 ## To get all Contacts
 
 ```
@@ -33,12 +10,16 @@ This returns a json object of the following;
 
 ```json
 [{
-  "name": "Jame Jackson",
-  "email": "sample@gmail.com",
-  "phone": "07063712398",
-  "address": "30, Akingbade street, ketu, Lagos",
-  "organisation": "Decagon Institute",
-  "image": "www.image.com/randomimage/avatar/3"
+  "id": 23,
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power",
+  "created" : "2019-01-21T08:24:05+01:00",
+  "isBlocked": false
 },
 ...
 ]
@@ -46,10 +27,65 @@ This returns a json object of the following;
 
 ---
 
-## To add a Contact
+## To get blocked Contacts
 
 ```
-POST: /api/contacts/contactId
+GET: /api/contacts/blocked
+```
+
+status code 200 if the contacts is successfully returned.
+
+This returns a json object of the following;
+
+```json
+[{
+  "id": 23,
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power",
+  "created" : "2019-01-21T08:24:05+01:00",
+  "isBlocked": true
+},...
+]
+```
+
+---
+
+## To get a Contact
+
+```
+GET: /api/contacts/contactId
+```
+
+status code 200 if the contact is successfully returned.
+
+This returns a json object of the following;
+
+```json
+{
+  "id": 23,
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power",
+  "created": "2019-01-21T08:24:05+01:00",
+  "isBlocked": false
+}
+```
+
+---
+
+## To create a Contact
+
+```
+POST: /api/contact
 ```
 
 ### Request
@@ -62,14 +98,29 @@ Content-Type:application/json
 
 Body
 
+```ts
+interface CreateContact {
+  first_name: string;
+  last_name?: string;
+  phone: string; // This should be a valid phone number in international format e.g +2348034324562
+  email?: string;
+  str_address?: string;
+  gender?: string;
+  company_name: string;
+}
+```
+
+for example
+
 ```json
 {
-  "name": "Daniel Oladele",
-  "email": "seun@gmail.com",
-  "phone": "07063712398",
-  "address": "30, Akingbade street, ketu, Lagos",
-  "organisation": "Decagon Institute",
-  "image": "www.image.com/randomimage/avatar/3"
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power"
 }
 ```
 
@@ -79,14 +130,25 @@ status code 201 if the contact was successfully created.
 
 This returns a json object of the posted contact in this format;
 
+```ts
+interface CreateContactResponse {
+  id: string; // The uuid of the newly created contact
+  created: string; // The ISO date of when the contact was created
+  contact: CreateContact; // An Object with the contact information
+}
+```
+
 ```json
 {
-  "name": "Daniel Oladele",
-  "email": "seun@gmail.com",
-  "phone": "07063712398",
-  "address": "30, Akingbade street, ketu, Lagos",
-  "organisation": "Decagon Institute",
-  "image": "www.image.com/randomimage/avatar/3"
+  "id": 4,
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power",
+  "created": "2019-01-21T08:24:05+01:00"
 }
 ```
 
@@ -96,6 +158,24 @@ This returns a json object of the posted contact in this format;
 
 ```
 PUT: /api/contacts/contactId
+```
+
+### Request
+
+Body
+
+for example
+
+```json
+{
+  "first_name": "Obasanjo",
+  "last_name": "anila",
+  "phone": "182-779-3953",
+  "email": "anila@ihg.com",
+  "str_address": "63 Chinook Terrace",
+  "gender": "Male",
+  "company_name": "Steel Power"
+}
 ```
 
 ### Response
@@ -113,6 +193,8 @@ This returns a json error object after the contact has been deleted;
   "error": "error.unauthorized"
 }
 ```
+
+---
 
 ## To delete a Contact
 
