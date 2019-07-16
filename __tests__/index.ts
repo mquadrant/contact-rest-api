@@ -106,10 +106,13 @@ describe('API Controller methods', () => {
             str_address: expect.any(String),
         });
     });
-    test('blockContact should block a contact and return contact not found', () => {
-        expect(() =>
+    test('blockContact should block a contact successfully', () => {
+        expect(
             blockContact('45745c60-7b1a-11e8-9c9c-2d42116eaa3e')
-        ).toThrow('Contact not found');
+        ).resolves.toBe('Contact blocked successfully!');
+        expect(blockContact('45745c60-7b1a-11e83e')).rejects.toBe(
+            'Sorry, something went wrong!'
+        );
     });
     test('updateContact should block a contact and return contact not found', () => {
         const contact = updateContact('45745c60-7b1a-11e8-9c9c-2d43331b1a3e', {
