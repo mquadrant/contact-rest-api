@@ -25,7 +25,7 @@ router.get('/contacts/blocked', function(_req, res) {
     res.status(200).json({ data: contacts });
 });
 /* GET SPECIFIC CONTACT BY ID */
-router.get('/contact/:contactId', function(_req, res) {
+router.get('/contacts/:contactId', function(_req, res) {
     try {
         const data = getContact(_req.params.contactId);
         res.status(200).json({ data });
@@ -35,7 +35,7 @@ router.get('/contact/:contactId', function(_req, res) {
 });
 
 /* ADD CONTACT*/
-router.post('/contact', function(req, res) {
+router.post('/contacts', function(req, res) {
     const contact = new CreateContact(req.body);
     contact
         .save()
@@ -48,7 +48,7 @@ router.post('/contact', function(req, res) {
 });
 
 /* UNBLOCK CONTACT BY ID */
-router.put('/contact/:contactId/unblock', function(_req, res) {
+router.put('/contacts/:contactId/unblock', function(_req, res) {
     try {
         unBlockContact(_req.params.contactId);
         res.status(200).send('Contact unblocked successfully!');
@@ -57,7 +57,7 @@ router.put('/contact/:contactId/unblock', function(_req, res) {
     }
 });
 /* BLOCK CONTACT BY ID */
-router.put('/contact/:contactId/block', async function(req, res) {
+router.put('/contacts/:contactId/block', async function(req, res) {
     try {
         await blockContact(req.params.contactId);
         res.status(200).send('Contact blocked successfully!');
@@ -66,7 +66,7 @@ router.put('/contact/:contactId/block', async function(req, res) {
     }
 });
 /* UPDATE CONTACT BY ID */
-router.put('/contact/:contactId', async function(req, res) {
+router.put('/contacts/:contactId', async function(req, res) {
     try {
         const data = await updateContact(req.params.contactId, req.body);
         res.status(201).json({ data: data });
@@ -75,7 +75,7 @@ router.put('/contact/:contactId', async function(req, res) {
     }
 });
 /* DELETE BY ID */
-router.delete('/contact/:contactId', async function(req, res) {
+router.delete('/contacts/:contactId', async function(req, res) {
     try {
         const data = await deleteContact(req.params.contactId);
         res.status(200).send(data);
