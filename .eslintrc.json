@@ -14,6 +14,7 @@
     },
     "plugins": ["prettier"],
     "rules": {
+        "no-var": "off",
         "prettier/prettier": "error",
         "spaced-comment": "off",
         "no-console": "warn",
@@ -25,6 +26,10 @@
         "no-process-exit": "off",
         "consistent-return": "off",
         "class-methods-use-this": "off",
-        "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|val|next" }]
+        "no-unused-vars": [
+            "error",
+            { "argsIgnorePattern": "req|res|val|next" }
+        ],
+        "no-use-before-define": "off"
     }
 }
