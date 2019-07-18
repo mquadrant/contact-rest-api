@@ -4,7 +4,7 @@
 /**
  * Module dependencies.
  */
-
+require("dotenv").config({ path: __dirname + "/./../config.env" });
 var app = require("../dist/src/app").default;
 var debug = require("debug")("express-class:server");
 var http = require("http");
