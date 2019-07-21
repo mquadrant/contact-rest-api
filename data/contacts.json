@@ -119,16 +119,5 @@
         "company_name": "Twitterlist",
         "isBlocked": true,
         "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "first_name": "Valene",
-        "last_name": "Ellery",
-        "phone": "699-354-1851",
-        "email": "velleryh@ning.com",
-        "str_address": "60610 Anderson Way",
-        "gender": "Female",
-        "company_name": "Viva",
-        "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
     }
 ]
