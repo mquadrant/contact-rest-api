@@ -1,6 +1,5 @@
 [
     {
-        "uid": "45745c60-7111-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Elaine",
         "last_name": "Baine",
         "phone": "188-617-4792",
@@ -12,7 +11,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-11e8-9c9c-2d43331b1a3e",
         "first_name": "Hazel",
         "last_name": "Ruilton",
         "phone": "710-165-5129",
@@ -24,7 +22,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "4574660a-7b1a-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Riordan",
         "last_name": "McGibbon",
         "phone": "147-684-6486",
@@ -36,7 +33,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7ee2-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Kessiah",
         "last_name": "Morrott",
         "phone": "157-245-6551",
@@ -48,7 +44,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-11e8-9c9c-2d42116eaa3e",
         "first_name": "Clementia",
         "last_name": "Spickett",
         "phone": "767-438-1758",
@@ -60,7 +55,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "452287ab-7b1a-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Lonny",
         "last_name": "Studdal",
         "phone": "745-295-9971",
@@ -72,7 +66,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Umberto",
         "last_name": "Borland",
         "phone": "182-779-3953",
@@ -84,79 +77,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b4a-11e8-9c9c-2d42b21b1a3e",
-        "first_name": "Hill",
-        "last_name": "Hedges",
-        "phone": "831-219-7409",
-        "email": "hhedges7@last.fm",
-        "str_address": "0 Oakridge Center",
-        "gender": "Male",
-        "company_name": "Linklinks",
-        "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "45745c60-7b1a-11e8-9c9c-2d42b91b1a3e",
-        "first_name": "Hope",
-        "last_name": "Fallow",
-        "phone": "104-561-2585",
-        "email": "hfallow8@plala.or.jp",
-        "str_address": "341 Oneill Court",
-        "gender": "Female",
-        "company_name": "Mymm",
-        "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "45719c60-7b1a-11e8-9c9c-2d42b21b1a3e",
-        "first_name": "Inglis",
-        "last_name": "Tournie",
-        "phone": "729-480-0540",
-        "email": "itournie9@europa.eu",
-        "str_address": "5330 Dryden Hill",
-        "gender": "Male",
-        "company_name": "Janyx",
-        "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "45745c60-7b1a-11e8-9c9c-2d42b21d9a3e",
-        "first_name": "Anabel",
-        "last_name": "Hallut",
-        "phone": "583-596-7818",
-        "email": "ahalluta@cisco.com",
-        "str_address": "279 Myrtle Hill",
-        "gender": "Female",
-        "company_name": "Yambee",
-        "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "11745c00-7b1a-11e8-9c9c-2d42b21b1a3e",
-        "first_name": "Shermie",
-        "last_name": "Boutell",
-        "phone": "426-727-7604",
-        "email": "sboutellb@intel.com",
-        "str_address": "192 American Ash Park",
-        "gender": "Male",
-        "company_name": "Kwilith",
-        "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "45745c60-7b1a-11e8-9c0a-1d42b21b1a3e",
-        "first_name": "Elsworth",
-        "last_name": "Sollam",
-        "phone": "500-132-8178",
-        "email": "esollamc@furl.net",
-        "str_address": "8685 Knutson Lane",
-        "gender": "Male",
-        "company_name": "Kimia",
-        "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
-    },
-    {
-        "uid": "45745c60-7b1a-11e8-9c9c-2e4d321b1a3e",
         "first_name": "Tommy",
         "last_name": "Schonfelder",
         "phone": "316-438-3324",
@@ -168,7 +88,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45314c60-7b1a-11e8-9c9c-2d42b21b1a3e",
         "first_name": "Pyotr",
         "last_name": "Rowlin",
         "phone": "971-455-5854",
@@ -180,7 +99,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-31e8-9c9c-2d42b81b1a3e",
         "first_name": "Gonzales",
         "last_name": "Gain",
         "phone": "343-392-8113",
@@ -192,7 +110,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-abc3-9c9c-2d42b21b1a3e",
         "first_name": "Clyve",
         "last_name": "Yakobovicz",
         "phone": "457-298-8037",
@@ -204,7 +121,6 @@
         "created": "2019-04-18T08:20:48+01:00"
     },
     {
-        "uid": "45745c60-7b1a-11e8-9c9c-2e29b81b1a3e",
         "first_name": "Valene",
         "last_name": "Ellery",
         "phone": "699-354-1851",
