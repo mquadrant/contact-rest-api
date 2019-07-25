@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // CONTACT SCHEMA
 const contactSchema = new mongoose.Schema({
@@ -24,6 +24,7 @@ const contactSchema = new mongoose.Schema({
         required: [true, "A contact must have a phone number"],
         trim: true,
         maxlength: [14, "A contact number should not be more than 11 digit"],
+        unique: true,
     },
     email: {
         type: String,
