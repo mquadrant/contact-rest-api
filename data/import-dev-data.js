@@ -91,6 +91,19 @@ const importData = async () => {
     }
 };
 
+const deleteData = async () => {
+    try {
+        await Contact.deleteMany();
+        console.log("Data deleted successfully!");
+        process.exit();
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 if (process.argv[2] === "--import") {
     importData();
+}
+if (process.argv[2] === "--delete") {
+    deleteData();
 }
