@@ -8,7 +8,7 @@
         "gender": "Female",
         "company_name": "Skibox",
         "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Hazel",
@@ -19,7 +19,7 @@
         "gender": "Female",
         "company_name": "Demizz",
         "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Riordan",
@@ -30,7 +30,7 @@
         "gender": "Male",
         "company_name": "Skyba",
         "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Kessiah",
@@ -41,7 +41,7 @@
         "gender": "Female",
         "company_name": "Skivee",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Clementia",
@@ -52,7 +52,7 @@
         "gender": "Female",
         "company_name": "Blogspan",
         "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Lonny",
@@ -63,7 +63,7 @@
         "gender": "Male",
         "company_name": "Zoomlounge",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Umberto",
@@ -74,7 +74,7 @@
         "gender": "Male",
         "company_name": "Tagfeed",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Tommy",
@@ -85,7 +85,7 @@
         "gender": "Female",
         "company_name": "Dabvine",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Pyotr",
@@ -96,7 +96,7 @@
         "gender": "Male",
         "company_name": "Camimbo",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Gonzales",
@@ -107,7 +107,7 @@
         "gender": "Male",
         "company_name": "Flipstorm",
         "isBlocked": false,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     },
     {
         "first_name": "Clyve",
@@ -118,6 +118,6 @@
         "gender": "Male",
         "company_name": "Twitterlist",
         "isBlocked": true,
-        "created": "2019-04-18T08:20:48+01:00"
+        "createdAt": "2019-04-18T08:20:48+01:00"
     }
 ]
