@@ -1,44 +1,78 @@
 import { Request, Response } from "express";
+import Contact from "../models/contactModel";
 // import uuidv1 from "uuid/v1";
-import contacts from "../../data/contacts.json";
+// import contacts from "../../data/contacts.json";
 // import IContact from "./interface";
 
-export const getContacts = (_req: Request, res: Response) => {
-    const unblockContact = contacts.filter(
-        (contact: any) => contact.isBlocked === false
-    );
-    res.status(200).json({
-        status: "success",
-        results: unblockContact.length,
-        data: { unblockContact },
-    });
-};
-
-export const getBlockedContacts = (_req: Request, res: Response) => {
-    const blockContact = contacts.filter(
-        (contact: any) => contact.isBlocked === true
-    );
-    res.status(200).json({
-        status: "success",
-        results: blockContact.length,
-        data: { blockContact },
-    });
-};
-
-export const getContact = (req: Request, res: Response) => {
-    const contactID = req.params.contactId;
-    const contact = contacts.filter((contact: any) => contact.id === contactID);
-    if (!contact.length) {
-        res.status(404).json({ status: "fail", message: "Invalid ID" });
-    } else if (!contact[0].isBlocked)
-        res.status(200).json({ status: "success", data: contact[0] });
-    else
+export const getAllContacts = async (_req: Request, res: Response) => {
+    try {
+        const contact = await Contact.find();
+        res.status(200).json({
+            status: "success",
+            results: contact.length,
+            data: {
+                contact,
+            },
+        });
+    } catch (err) {
         res.status(404).json({
             status: "fail",
-            message: "contact blocked",
+            message: err,
         });
+    }
 };
 
+export const getBlockedContacts = async (_req: Request, res: Response) => {
+    try {
+        const blockContact = await Contact.find({ isBlocked: true });
+        res.status(200).json({
+            status: "success",
+            results: blockContact.length,
+            data: {
+                blockContact,
+            },
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err,
+        });
+    }
+};
+
+export const getContactById = async (req: Request, res: Response) => {
+    try {
+        const contact = await Contact.findById(req.params.contactId);
+        res.status(200).json({
+            status: "success",
+            data: {
+                contact,
+            },
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err,
+        });
+    }
+};
+
+export const createContact = async (req: Request, res: Response) => {
+    try {
+        const contact = await Contact.create(req.body);
+        res.status(201).json({
+            status: "success",
+            data: {
+                contact,
+            },
+        });
+    } catch (err) {
+        res.status(404).json({
+            status: "fail",
+            message: err,
+        });
+    }
+};
 // export class CreateContact {
 //     id: string;
 
@@ -85,17 +119,6 @@ export const getContact = (req: Request, res: Response) => {
 //         });
 //         return Promise.resolve(getContact(this.id));
 //     }
-// }
-// export const createContact = (req:Request, res:Response) => {
-//     const contact = new CreateContact(req.body);
-//     contact
-//         .save()
-//         .then((contact: any) => {
-//             res.status(201).json({ data: contact });
-//         })
-//         .catch((_err: any) => {
-//             res.status(400).send("unable to save to database");
-//         });
 // }
 
 // export function unBlockContact(contactID: string) {

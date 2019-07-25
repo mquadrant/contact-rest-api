@@ -1,9 +1,9 @@
 import { Router } from "express";
 import {
-    getContacts,
+    getAllContacts,
     getBlockedContacts,
-    getContact,
-    // createContact,
+    getContactById,
+    createContact,
     // unBlockContact,
     // blockContact,
     // updateContact,
@@ -16,14 +16,14 @@ router.get("/", function(_req, res, _next) {
     res.status(200).json({ message: "All is well" });
 });
 /* GET CONTACTS LISTING */
-router.get("/contacts", getContacts);
+router.get("/contacts", getAllContacts);
 /* GET BLOCKED CONTACTS */
 router.get("/contacts/blocked", getBlockedContacts);
 /* GET SPECIFIC CONTACT BY ID */
-router.get("/contacts/:contactId", getContact);
+router.get("/contacts/:contactId", getContactById);
 
 /* ADD CONTACT*/
-// router.post("/contacts", createContact);
+router.post("/contacts", createContact);
 
 /* UNBLOCK CONTACT BY ID */
 // router.put("/contacts/:contactId/unblock", function(_req, res) {
