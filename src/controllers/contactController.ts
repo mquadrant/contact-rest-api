@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import Contact from "../models/contactModel";
-// import IContact from "./interface";
+import catchAsync from "../utils/catchAsync";
 
-export const getAllContacts = async (_req: Request, res: Response) => {
-    try {
+export const getAllContacts = catchAsync(
+    async (_req: Request, res: Response) => {
         const contact = await Contact.find({ isBlocked: false });
         res.status(200).json({
             status: "success",
@@ -12,16 +12,11 @@ export const getAllContacts = async (_req: Request, res: Response) => {
                 contact,
             },
         });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err,
-        });
     }
-};
+);
 
-export const getBlockedContacts = async (_req: Request, res: Response) => {
-    try {
+export const getBlockedContacts = catchAsync(
+    async (_req: Request, res: Response) => {
         const blockContact = await Contact.find({ isBlocked: true });
         res.status(200).json({
             status: "success",
@@ -30,16 +25,11 @@ export const getBlockedContacts = async (_req: Request, res: Response) => {
                 blockContact,
             },
         });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err,
-        });
     }
-};
+);
 
-export const getContactById = async (req: Request, res: Response) => {
-    try {
+export const getContactById = catchAsync(
+    async (req: Request, res: Response, _next: NextFunction) => {
         const contact = await Contact.findById(req.params.contactId);
         res.status(200).json({
             status: "success",
@@ -47,33 +37,21 @@ export const getContactById = async (req: Request, res: Response) => {
                 contact,
             },
         });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err,
-        });
     }
-};
+);
 
-export const createContact = async (req: Request, res: Response) => {
-    try {
-        const contact = await Contact.create(req.body);
-        res.status(201).json({
-            status: "success",
-            data: {
-                contact,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err,
-        });
-    }
-};
+export const createContact = catchAsync(async (req: Request, res: Response) => {
+    const contact = await Contact.create(req.body);
+    res.status(201).json({
+        status: "success",
+        data: {
+            contact,
+        },
+    });
+});
 
-export const unBlockContact = async (req: Request, res: Response) => {
-    try {
+export const unBlockContact = catchAsync(
+    async (req: Request, res: Response) => {
         const contact = await Contact.findByIdAndUpdate(
             req.params.contactId,
             { isBlocked: false },
@@ -85,62 +63,45 @@ export const unBlockContact = async (req: Request, res: Response) => {
             status: "success",
             data: contact,
         });
-    } catch (err) {
-        res.status(404).json({
-            status: "fail",
-            message: err,
-        });
     }
-};
+);
 
-export const blockContact = async (req: Request, res: Response) => {
-    try {
-        const contact = await Contact.findByIdAndUpdate(
-            req.params.contactId,
-            { isBlocked: true },
-            {
-                new: true,
-            }
-        );
-        res.status(200).json({
-            status: "success",
-            data: {
-                contact,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({ status: "fail", message: err });
-    }
-};
+export const blockContact = catchAsync(async (req: Request, res: Response) => {
+    const contact = await Contact.findByIdAndUpdate(
+        req.params.contactId,
+        { isBlocked: true },
+        {
+            new: true,
+        }
+    );
+    res.status(200).json({
+        status: "success",
+        data: {
+            contact,
+        },
+    });
+});
 
-export const updateContact = async (req: Request, res: Response) => {
-    try {
-        const contact = await Contact.findByIdAndUpdate(
-            req.params.contactId,
-            req.body,
-            {
-                new: true,
-                runValidators: true,
-            }
-        );
-        res.status(200).json({
-            status: "success",
-            data: {
-                contact,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({ status: "fail", message: err });
-    }
-};
+export const updateContact = catchAsync(async (req: Request, res: Response) => {
+    const contact = await Contact.findByIdAndUpdate(
+        req.params.contactId,
+        req.body,
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+    res.status(200).json({
+        status: "success",
+        data: {
+            contact,
+        },
+    });
+});
 
-export const deleteContact = async (req: Request, res: Response) => {
-    try {
-        await Contact.findByIdAndDelete(req.params.contactId);
-        res.status(204).json({
-            status: "success",
-        });
-    } catch (err) {
-        res.status(404).json({ status: "fail", message: err });
-    }
-};
+export const deleteContact = catchAsync(async (req: Request, res: Response) => {
+    await Contact.findByIdAndDelete(req.params.contactId);
+    res.status(204).json({
+        status: "success",
+    });
+});

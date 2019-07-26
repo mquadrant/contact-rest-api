@@ -1,8 +1,9 @@
-import createError from "http-errors";
+// import createError from "http-errors";
 import express from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import AppError from "./utils/appError";
 import globalErrorHandler from "./controllers/errorController";
 
 import indexRouter from "./routes/index";
@@ -25,7 +26,8 @@ app.use("/api/v1", contactsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(_req, _res, next) {
-    next(createError(404));
+    // next(createError(`Can\'t find ${_req.originalUrl} on this server`));
+    next(new AppError(`Can\'t find ${_req.originalUrl} on this server`));
 });
 
 // error handler
