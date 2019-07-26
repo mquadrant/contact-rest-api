@@ -4,12 +4,13 @@ const mongoose = require("mongoose");
 // const Contact = require("./contacts.json");
 
 //Database Connection
-const DB = process.env.DATABASE.replace(
-    "<PASSWORD>",
-    process.env.DATABASE_PASSWORD
-);
+// const DB = process.env.DATABASE.replace(
+//     "<PASSWORD>",
+//     process.env.DATABASE_PASSWORD
+// );
+const DB1 = process.env.DATABASE_LOCAL;
 mongoose
-    .connect(DB, {
+    .connect(DB1, {
         useNewUrlParser: true,
         useCreateIndex: true,
         useFindAndModify: false,
