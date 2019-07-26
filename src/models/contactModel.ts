@@ -53,6 +53,10 @@ const contactSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
+    __v: {
+        type: Number,
+        select: false,
+    },
 });
 
 const Contact = mongoose.model("Contact", contactSchema);
