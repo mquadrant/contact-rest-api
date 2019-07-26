@@ -13,7 +13,7 @@ import {
 var router = Router();
 
 router.get("/", function(_req, res, _next) {
-    res.status(200).json({ message: "All is well" });
+    res.status(200).json({ message: "Here is Contact API version 1.0.0" });
 });
 /* GET CONTACTS LISTING */
 router.get("/contacts", getAllContacts);
