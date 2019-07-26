@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import Contact from "../models/contactModel";
 import catchAsync from "../utils/catchAsync";
+import AppError from "../utils/appError";
 
 export const getAllContacts = catchAsync(
     async (_req: Request, res: Response) => {
@@ -31,6 +32,11 @@ export const getBlockedContacts = catchAsync(
 export const getContactById = catchAsync(
     async (req: Request, res: Response, _next: NextFunction) => {
         const contact = await Contact.findById(req.params.contactId);
+
+        if (!contact) {
+            return _next(new AppError(`No Contact Found with that ID`, 404));
+        }
+
         res.status(200).json({
             status: "success",
             data: {
@@ -51,7 +57,7 @@ export const createContact = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const unBlockContact = catchAsync(
-    async (req: Request, res: Response) => {
+    async (req: Request, res: Response, _next: NextFunction) => {
         const contact = await Contact.findByIdAndUpdate(
             req.params.contactId,
             { isBlocked: false },
@@ -59,6 +65,11 @@ export const unBlockContact = catchAsync(
                 new: true,
             }
         );
+
+        if (!contact) {
+            return _next(new AppError(`No Contact Found with that ID`, 404));
+        }
+
         res.status(200).json({
             status: "success",
             data: contact,
@@ -66,42 +77,63 @@ export const unBlockContact = catchAsync(
     }
 );
 
-export const blockContact = catchAsync(async (req: Request, res: Response) => {
-    const contact = await Contact.findByIdAndUpdate(
-        req.params.contactId,
-        { isBlocked: true },
-        {
-            new: true,
-        }
-    );
-    res.status(200).json({
-        status: "success",
-        data: {
-            contact,
-        },
-    });
-});
+export const blockContact = catchAsync(
+    async (req: Request, res: Response, _next: NextFunction) => {
+        const contact = await Contact.findByIdAndUpdate(
+            req.params.contactId,
+            { isBlocked: true },
+            {
+                new: true,
+            }
+        );
 
-export const updateContact = catchAsync(async (req: Request, res: Response) => {
-    const contact = await Contact.findByIdAndUpdate(
-        req.params.contactId,
-        req.body,
-        {
-            new: true,
-            runValidators: true,
+        if (!contact) {
+            return _next(new AppError(`No Contact Found with that ID`, 404));
         }
-    );
-    res.status(200).json({
-        status: "success",
-        data: {
-            contact,
-        },
-    });
-});
 
-export const deleteContact = catchAsync(async (req: Request, res: Response) => {
-    await Contact.findByIdAndDelete(req.params.contactId);
-    res.status(204).json({
-        status: "success",
-    });
-});
+        res.status(200).json({
+            status: "success",
+            data: {
+                contact,
+            },
+        });
+    }
+);
+
+export const updateContact = catchAsync(
+    async (req: Request, res: Response, _next: NextFunction) => {
+        const contact = await Contact.findByIdAndUpdate(
+            req.params.contactId,
+            req.body,
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
+
+        if (!contact) {
+            return _next(new AppError(`No Contact Found with that ID`, 404));
+        }
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                contact,
+            },
+        });
+    }
+);
+
+export const deleteContact = catchAsync(
+    async (req: Request, res: Response, _next: NextFunction) => {
+        const contact = await Contact.findByIdAndDelete(req.params.contactId);
+
+        if (!contact) {
+            return _next(new AppError(`No Contact Found with that ID`, 404));
+        }
+
+        res.status(204).json({
+            status: "success",
+        });
+    }
+);

@@ -144,17 +144,18 @@ describe("GET /api/contacts/:contactId", () => {
                 });
             });
     });
-    // test("that it return Not Found message when id is not found", () => {
-    //     return request(app)
-    //         .get("/api/v1/contacts/6628278a")
-    //         .set("Accept", "application/json")
-    //         .expect(404)
-    //         .then(response => {
-    //             expect(response.body.message).toStrictEqual({
-    //                 error: "Contact not found",
-    //             });
-    //         });
-    // });
+    test("that it return Not Found message when id is not found", () => {
+        return request(app)
+            .get("/api/v1/contacts/5d39e5c21107aaa99981a671")
+            .set("Accept", "application/json")
+            .expect(404)
+            .then(response => {
+                expect(response.body).toStrictEqual({
+                    status: "fail",
+                    message: "No Contact Found with that ID",
+                });
+            });
+    });
 });
 
 describe("POST /api/v1/contacts", () => {
@@ -198,16 +199,17 @@ describe("PATCH api/v1/contacts/:contactId/unblock", () => {
                 expect(res.body.status).toStrictEqual("success");
             });
     });
-    //     test("that it return an error message when a wrong id is passed", () => {
-    //         return request(app)
-    //             .patch("/api/v1/contact/45745c60-7b1a-11/unblock")
-    //             .expect(404)
-    //             .then(res => {
-    //                 expect(res.body).toStrictEqual({
-    //                     error: "An error occured, try again!",
-    //                 });
-    //             });
-    //     });
+    test("that it return an error message when a wrong id is passed", () => {
+        return request(app)
+            .patch("/api/v1/contacts/5d39e5c21107aaa99981a671/unblock")
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    status: "fail",
+                    message: "No Contact Found with that ID",
+                });
+            });
+    });
 });
 
 describe("PATCH api/v1/contacts/:contactId/block", () => {
@@ -219,16 +221,17 @@ describe("PATCH api/v1/contacts/:contactId/block", () => {
                 expect(res.body.status).toStrictEqual("success");
             });
     });
-    // test("that it returns error when wrong id is passed", () => {
-    //     return request(app)
-    //         .patch("/api/v1/contact/45745c6-wrong-6eaa3e/block")
-    //         .expect(404)
-    //         .then(res => {
-    //             expect(res.body).toStrictEqual({
-    //                 error: "An error occured, try again!",
-    //             });
-    //         });
-    // });
+    test("that it returns error when wrong id is passed", () => {
+        return request(app)
+            .patch("/api/v1/contacts/5d39e5c21107aaa99981a671/block")
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    status: "fail",
+                    message: "No Contact Found with that ID",
+                });
+            });
+    });
 });
 
 describe("PUT api/v1/contacts/:contactId", () => {
@@ -255,33 +258,47 @@ describe("PUT api/v1/contacts/:contactId", () => {
                 });
             });
     });
-    //     test("that it returns error when id is wrong", () => {
-    //         return request(app)
-    //             .put("/api/v1/contact/4574-2d43331b1a3e")
-    //             .send(contact)
-    //             .expect(404)
-    //             .then(res => {
-    //                 expect(res.body).toEqual({
-    //                     error: "An error occured, try again!",
-    //                 });
-    //             });
-    //     });
+    test("that it returns error when id is wrong", () => {
+        return request(app)
+            .put("/api/v1/contacts/5d39e5c21107aaa99981a671")
+            .send(contact)
+            .expect(404)
+            .then(res => {
+                expect(res.body).toEqual({
+                    status: "fail",
+                    message: "No Contact Found with that ID",
+                });
+            });
+    });
 });
 
 describe("DELETE /api/v1/contacts/:contactId", () => {
+    afterAll(async () => {
+        await Contact.create({
+            _id: "5d39e583f10212a8c0c2832b",
+            first_name: "Mr",
+            last_name: "delete",
+            phone: "08039delete",
+            email: "delete@gmail.com",
+            str_address: "delete address city",
+            gender: "Female",
+            company_name: "deleton inc",
+        });
+    });
     test("that it deletes successfully", () => {
         return request(app)
             .delete("/api/v1/contacts/5d39e583f10212a8c0c2832b")
             .expect(204);
     });
-    // test("that it returns error when id is wrong", () => {
-    //     return request(app)
-    //         .delete("/api/v1/contact/11e8-9c9c-2d43331b1a3e")
-    //         .expect(404)
-    //         .then(res => {
-    //             expect(res.body).toStrictEqual({
-    //                 error: "An error occured, try again!",
-    //             });
-    //         });
-    // });
+    test("that it returns error when id is wrong", () => {
+        return request(app)
+            .delete("/api/v1/contacts/5d39e583b10212a8c0c2832a")
+            .expect(404)
+            .then(res => {
+                expect(res.body).toStrictEqual({
+                    status: "fail",
+                    message: "No Contact Found with that ID",
+                });
+            });
+    });
 });
