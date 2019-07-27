@@ -5,6 +5,14 @@
  * Module dependencies.
  */
 require("dotenv").config({ path: __dirname + "/./../config.env" });
+
+//Handling uncaughtException
+process.on("uncaughtException", err => {
+    console.log("UNCAUGHT EXCEPTION! shutting down...");
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
 var app = require("../dist/app").default;
 var debug = require("debug")("express-class:server");
 var http = require("http");
@@ -24,7 +32,7 @@ mongoose
     .then(con => {
         console.log("DB connection successful!");
     })
-    .catch(err => console.log(err));
+    .catch(err => console.err(err));
 
 /**
  * Get port from environment and store in Express.
@@ -102,3 +110,12 @@ function onListening() {
     var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
     debug("Listening on " + bind);
 }
+
+//Handling unhandledRejection
+process.on("unhandledRejection", err => {
+    console.log("UNHANDLER REJECTION! shutting down...");
+    console.log(err.name, err.message);
+    server.close(() => {
+        process.exit(1);
+    });
+});
