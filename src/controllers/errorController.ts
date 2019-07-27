@@ -1,4 +1,23 @@
 import express from "express";
+import AppError from "../utils/appError";
+
+//handling invalid database id
+const handleCastErrorDb = (err: any) => {
+    const message = `Invalid ${err.path}:${err.value}.`;
+    return new AppError(message, 400);
+};
+
+const handleDuplicateFieldsDb = (err: any) => {
+    const error = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
+    const message = `Duplicate field value ${error}: Please use another value!`;
+    return new AppError(message, 400);
+};
+
+const handleValidationErrorDB = (err: any) => {
+    const errors = Object.values(err.errors).map((el: any) => el.message);
+    const message = `Invalid input data. ${errors.join(". ")}`;
+    return new AppError(message, 400);
+};
 
 const sendErrorDev = (err: any, res: express.Response) => {
     res.status(err.statusCode).json({
@@ -40,6 +59,13 @@ export = (
     if (process.env.NODE_ENV === "development") {
         sendErrorDev(err, res);
     } else if (process.env.NODE_ENV === "production") {
-        sendErrorProd(err, res);
+        let error = { ...err };
+
+        if (error.name === "CastError") error = handleCastErrorDb(error);
+        if (error.code === 11000) error = handleDuplicateFieldsDb(error);
+        if (error.name === "ValidationError")
+            error = handleValidationErrorDB(error);
+
+        sendErrorProd(error, res);
     }
 };
