@@ -10,7 +10,9 @@ function connectMongoDB() {
             useCreateIndex: true,
             useFindAndModify: false,
         })
-        .then(() => {})
+        .then(() => {
+            console.log("localhost connected!");
+        })
         .catch(err => {
             console.log(err);
             process.exit(1);
@@ -150,9 +152,11 @@ describe("GET /api/contacts/:contactId", () => {
             .set("Accept", "application/json")
             .expect(404)
             .then(response => {
-                expect(response.body).toStrictEqual({
+                expect(response.body).toEqual({
                     status: "fail",
                     message: "No Contact Found with that ID",
+                    error: expect.any(Object),
+                    stack: expect.any(String),
                 });
             });
     });
@@ -204,9 +208,11 @@ describe("PATCH api/v1/contacts/:contactId/unblock", () => {
             .patch("/api/v1/contacts/5d39e5c21107aaa99981a671/unblock")
             .expect(404)
             .then(res => {
-                expect(res.body).toStrictEqual({
+                expect(res.body).toEqual({
                     status: "fail",
                     message: "No Contact Found with that ID",
+                    error: expect.any(Object),
+                    stack: expect.any(String),
                 });
             });
     });
@@ -226,9 +232,11 @@ describe("PATCH api/v1/contacts/:contactId/block", () => {
             .patch("/api/v1/contacts/5d39e5c21107aaa99981a671/block")
             .expect(404)
             .then(res => {
-                expect(res.body).toStrictEqual({
+                expect(res.body).toEqual({
                     status: "fail",
                     message: "No Contact Found with that ID",
+                    error: expect.any(Object),
+                    stack: expect.any(String),
                 });
             });
     });
@@ -267,6 +275,8 @@ describe("PUT api/v1/contacts/:contactId", () => {
                 expect(res.body).toEqual({
                     status: "fail",
                     message: "No Contact Found with that ID",
+                    error: expect.any(Object),
+                    stack: expect.any(String),
                 });
             });
     });
@@ -295,9 +305,11 @@ describe("DELETE /api/v1/contacts/:contactId", () => {
             .delete("/api/v1/contacts/5d39e583b10212a8c0c2832a")
             .expect(404)
             .then(res => {
-                expect(res.body).toStrictEqual({
+                expect(res.body).toEqual({
                     status: "fail",
                     message: "No Contact Found with that ID",
+                    error: expect.any(Object),
+                    stack: expect.any(String),
                 });
             });
     });

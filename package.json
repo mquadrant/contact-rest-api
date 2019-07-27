@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "start:prod": "NODE_ENV=production nodemon ./bin/www",
-    "test": "jest",
+    "test": "NODE_ENV=development jest",
     "export-data": "node ./data/import-dev-data"
   },
   "dependencies": {
