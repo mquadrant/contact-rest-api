@@ -7,7 +7,7 @@ const Avatar = styled.div`
     height: 50px;
     border-top: 5px;
     border-radius: 48%;
-    background: #000 url(${props => (props.src ? props.src : GeneralImage)})
+    background: #f0f0f0 url(${props => (props.src ? props.src : GeneralImage)})
         center no-repeat;
     background-size: contain;
     ${props =>
@@ -40,6 +40,14 @@ const Avatar = styled.div`
         props.border &&
         css`
             border: 1px solid #f0f0f0;
+        `};
+    ${props =>
+        props.hover &&
+        css`
+            :hover {
+                background-color: #f2f5f5;
+                cursor: pointer;
+            }
         `};
 `;
 export default function AvatarCircle(props) {
