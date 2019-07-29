@@ -1,11 +1,7 @@
 import React from "react";
-import GeneralImage from "./../../images/final.png";
 import styled from "styled-components";
+import Avatar from "./AvatarCircle";
 
-const Avatar = styled.div`
-    background: #000 url(${GeneralImage}) center no-repeat;
-    background-size: contain;
-`;
 export default function ContactList() {
     return (
         <div
@@ -15,14 +11,7 @@ export default function ContactList() {
                 margin: "5px 5px",
             }}
         >
-            <Avatar
-                style={{
-                    width: "50px",
-                    borderTop: "5px",
-                    borderRadius: "48%",
-                    height: "50px",
-                }}
-            ></Avatar>
+            <Avatar></Avatar>
             <div
                 style={{
                     fontSize: "12px",
