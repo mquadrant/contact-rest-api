@@ -2,13 +2,3 @@
     min-height: 100vh;
     background-color: #f0f0f0;
 }
-
-.App-header {
-    background-color: #282c34;
-    height: 48px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
