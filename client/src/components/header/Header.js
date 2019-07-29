@@ -8,7 +8,6 @@ const header = {
     flexDirection: "row",
     justifyContent: "right",
     alignItems: "center",
-    fontSize: "calc(10px + 2vmin)",
     color: "white",
     padding: "0 20px",
 };
@@ -23,34 +22,12 @@ const Logo = styled.div`
     margin-left: 10px;
     position: relative;
 `;
-const LogoStart = styled.span`
+const LogoStart = styled.div`
     background: #ffa726;
     display: inline-block;
     text-align: center;
     margin-right: 2px;
-    width: 30px;
-    ::before {
-        content: " ";
-        position: absolute;
-        color: #fff;
-        width: 10px;
-        height: 20px;
-        left: 20px;
-        top: -9px;
-        border-radius: 10px 10px;
-        background: #282c34;
-    }
-    ::after {
-        content: " ";
-        position: absolute;
-        color: #fff;
-        width: 12px;
-        height: 20px;
-        left: 0px;
-        top: -5px;
-        border-radius: 10px 10px;
-        background: #282c34;
-    }
+    width: 20px;
 `;
 const Menu = styled.div`
     display: flex;
