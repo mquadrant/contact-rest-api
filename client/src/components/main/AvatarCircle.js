@@ -7,7 +7,8 @@ const Avatar = styled.div`
     height: 50px;
     border-top: 5px;
     border-radius: 48%;
-    background: #000 url(${GeneralImage}) center no-repeat;
+    background: #000 url(${props => (props.src ? props.src : GeneralImage)})
+        center no-repeat;
     background-size: contain;
     ${props =>
         props.position === "absolute" &&
