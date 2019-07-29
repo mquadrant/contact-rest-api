@@ -15,7 +15,12 @@ const Avatar = styled.div`
             position: absolute;
             top: ${props => props.top};
             bottom: ${props => props.bottom};
-            right: ${props => props.right};
+            right: ${props => {
+                return props.size
+                    ? `calc(${props.right} - ${parseInt(props.size) / 2}px)`
+                    : props.right;
+            }};
+
             left: ${props => props.left};
         `};
     ${props =>
