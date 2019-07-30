@@ -5,12 +5,12 @@ import AppError from "../utils/appError";
 
 export const getAllContacts = catchAsync(
     async (_req: Request, res: Response) => {
-        const contact = await Contact.find({ isBlocked: false });
+        const contacts = await Contact.find({ isBlocked: false });
         res.status(200).json({
             status: "success",
-            results: contact.length,
+            results: contacts.length,
             data: {
-                contact,
+                contacts,
             },
         });
     }
@@ -18,12 +18,12 @@ export const getAllContacts = catchAsync(
 
 export const getBlockedContacts = catchAsync(
     async (_req: Request, res: Response) => {
-        const blockContact = await Contact.find({ isBlocked: true });
+        const blockContacts = await Contact.find({ isBlocked: true });
         res.status(200).json({
             status: "success",
-            results: blockContact.length,
+            results: blockContacts.length,
             data: {
-                blockContact,
+                blockContacts,
             },
         });
     }
