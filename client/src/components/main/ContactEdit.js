@@ -14,6 +14,7 @@ const ContactView = styled.div`
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+        outline: none;
     }
 
     input[type="submit"] {
@@ -26,9 +27,21 @@ const ContactView = styled.div`
         border-radius: 4px;
         cursor: pointer;
     }
+    input[type="reset"] {
+        width: 100%;
+        background-color: #6c757d;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
     input[type="submit"]:hover {
         background-color: #0391c7;
+    }
+    input[type="reset"]:hover {
+        background-color: #6c7f7d;
     }
 `;
 
@@ -93,6 +106,7 @@ export default function ContactEdit() {
                             </option>
                             <option value="Female">Female</option>
                         </select>
+                        <input type="reset" value="Reset" />
                         <input type="submit" value="Update" />
                     </div>
                 </FlexContainer>
