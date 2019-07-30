@@ -18,15 +18,23 @@ const Detail = styled.div`
     width: 100%;
 `;
 
+const Scroll = styled.div`
+    overflow: auto;
+    height: calc(100% - 39px);
+    @media screen and (max-width: 600px) {
+        height: calc(100% - 88px);
+    }
+`;
+
 export default function Home() {
     return (
         <Container>
             <Master>
                 <Search></Search>
-                <div>
+                <Scroll>
                     <ContactList></ContactList>
                     <Divider></Divider>
-                </div>
+                </Scroll>
             </Master>
             <Detail>
                 <div
