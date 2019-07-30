@@ -7,14 +7,15 @@ import {
 function fetchContacts() {
     return dispatch => {
         dispatch(fetchContactsPending());
-        fetch("https://exampleapi.com/products")
+        fetch("http://localhost:3200/api/v1/contacts")
             .then(res => res.json())
             .then(res => {
                 if (res.error) {
                     throw res.error;
                 }
-                dispatch(fetchContactsSuccess(res.contacts));
-                return res.contacts;
+                console.log(res.data.contacts);
+                dispatch(fetchContactsSuccess(res.data.contacts));
+                return res.data.contacts;
             })
             .catch(error => {
                 dispatch(fetchContactsError(error));
