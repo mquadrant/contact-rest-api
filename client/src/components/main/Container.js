@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export default styled.div`
-    display: flex;
+    display: ${props => (props.display ? props.display : `flex`)};
 
     background: #fff;
     border-radius: 2px;
@@ -11,7 +11,7 @@ export default styled.div`
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     height: 450px;
-    width: 60%;
+    width: ${props => (props.width ? props.width : `60%`)};
     margin-top: 30px;
     @media (max-width: 768px) {
         width: 700px;
