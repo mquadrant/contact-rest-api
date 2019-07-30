@@ -34,6 +34,6 @@ export function contactReducer(state = initialState, action) {
     }
 }
 
-export const getProducts = state => state.products;
-export const getProductsPending = state => state.pending;
-export const getProductsError = state => state.error;
+export const getContacts = state => state.contact.contacts;
+export const getContactsPending = state => state.contact.pending;
+export const getContactsError = state => state.contact.error;
