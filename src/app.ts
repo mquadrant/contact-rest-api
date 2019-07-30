@@ -4,6 +4,7 @@ import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import AppError from "./utils/appError";
+import cors from 'cors';
 import globalErrorHandler from "./controllers/errorController";
 
 import indexRouter from "./routes/index";
@@ -15,6 +16,7 @@ var app = express();
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "jade");
 
+app.use()
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
