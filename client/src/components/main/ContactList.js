@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import Avatar from "./AvatarCircle";
 
 export default function ContactList() {

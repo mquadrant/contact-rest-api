@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export default styled.hr`
     border: solid 0.5px #f0f0f0;

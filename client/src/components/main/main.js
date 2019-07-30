@@ -1,13 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    Route,
-    Switch,
-    Link,
-    NavLink,
-    withRouter,
-    BrowserRouter as Router,
-} from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Home from "../Pages/Home";
 import Add from "../Pages/Add";
 import SideTray from "./SideTray";
