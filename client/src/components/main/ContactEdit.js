@@ -1,5 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import fetchContactsAction from "./../../store/thunks/contactsThunk";
+import {
+    getContactsPending,
+    getContacts,
+    getContactsError,
+} from "./../../store/reducers/contactReducer";
 
 const ContactView = styled.div`
     border-radius: 5px;
@@ -50,17 +58,32 @@ const ContactView = styled.div`
 const FlexContainer = styled.div`
     display: flex;
 `;
-export default function ContactEdit() {
+function ContactEdit(props) {
+    const { fetchContacts, contacts, pending, error, contact } = props;
+
     let defaultContact = {
-        fname: "John",
-        lname: "Benedict",
-        email: "John@gmail.com",
-        phone: "08965377568",
-        address: "Ocean dream avenue",
-        gender: "Male",
-        company: "Shell company",
+        fname: contact.first_name,
+        lname: contact.last_name,
+        email: contact.email,
+        phone: contact.phone,
+        address: contact.str_address,
+        gender: contact.gender,
+        company: contact.company_name,
     };
-    const [values, setValues] = useState(defaultContact);
+    useEffect(() => {
+        setValues({
+            fname: contact.first_name,
+            lname: contact.last_name,
+            email: contact.email,
+            phone: contact.phone,
+            address: contact.str_address,
+            gender: contact.gender,
+            company: contact.company_name,
+        });
+        return () => {};
+    }, [contact]);
+    const [values, setValues] = useState({ ...defaultContact });
+
     const handleChange = event => {
         const { name, value } = event.target;
         setValues({ ...values, [name]: value });
@@ -135,7 +158,7 @@ export default function ContactEdit() {
                             onChange={handleChange}
                             value={values.gender}
                         >
-                            <option value="Male">Male</option>
+                            <option name="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
                         <input type="reset" value="Reset" />
@@ -146,3 +169,20 @@ export default function ContactEdit() {
         </ContactView>
     );
 }
+
+const mapStateToProps = state => ({
+    error: getContactsError(state),
+    contacts: getContacts(state),
+    pending: getContactsPending(state),
+});
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            fetchContacts: fetchContactsAction,
+        },
+        dispatch
+    );
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ContactEdit);

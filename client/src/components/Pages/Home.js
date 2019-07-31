@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Search from "../main/Search";
 import ContactList from "../main/ContactList";
@@ -6,10 +6,21 @@ import Divider from "../main/Divider";
 import AvatarCircle from "../main/AvatarCircle";
 import ContactEdit from "../main/ContactEdit";
 import Container from "./../main/Container";
+import NewPage from "./../others/NewPage";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import fetchContactsAction from "./../../store/thunks/contactsThunk";
+import {
+    getContactsPending,
+    getContacts,
+    getContactsError,
+} from "./../../store/reducers/contactReducer";
+import ContactHeader from "../main/ContactHeader";
 
 const Master = styled.div`
     background: #fff;
-    width: 35%;
+    width: 37%;
     padding: 5px 0;
     border-right: 1px solid #f0f0f0;
 `;
@@ -21,39 +32,79 @@ const Detail = styled.div`
 const Scroll = styled.div`
     overflow: auto;
     height: calc(100% - 39px);
-    @media screen and (max-width: 600px) {
+    .contactList {
+        padding: 10px 0;
+        border-bottom: 0.5px solid #f0f0f0;
+    }
+    .contactList:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 1200px) {
         height: calc(100% - 88px);
     }
 `;
 
-export default function Home() {
+function Home(props) {
+    const { fetchContacts, contacts, pending, error } = props;
+    const [contact, setContact] = useState(0);
+    useEffect(() => {
+        fetchContacts();
+        return () => {};
+    }, [fetchContacts]);
+
+    const clickContact = id => {
+        setContact(contacts.filter(contact => contact._id === id)[0]);
+    };
     return (
         <Container>
             <Master>
                 <Search></Search>
                 <Scroll>
-                    <ContactList></ContactList>
-                    <Divider></Divider>
+                    {contacts.map(contact => (
+                        <div
+                            className="contactList"
+                            id={contact._id}
+                            onClick={() => clickContact(contact._id)}
+                        >
+                            <ContactList
+                                fname={contact.first_name}
+                                lname={contact.last_name}
+                                phone={contact.phone}
+                            ></ContactList>
+                        </div>
+                    ))}
                 </Scroll>
             </Master>
             <Detail>
-                <div
-                    style={{
-                        background: "#039fc7",
-                        width: "100%",
-                        height: "100px",
-                        position: "relative",
-                    }}
-                >
-                    <AvatarCircle
-                        size="70"
-                        position="absolute"
-                        top="50%"
-                        right="50%"
-                    ></AvatarCircle>
-                </div>
-                <ContactEdit></ContactEdit>
+                {contact ? (
+                    <>
+                        <ContactHeader></ContactHeader>
+                        <ContactEdit contact={contact}></ContactEdit>
+                    </>
+                ) : (
+                    <>
+                        <NewPage></NewPage>
+                    </>
+                )}
             </Detail>
         </Container>
     );
 }
+
+const mapStateToProps = state => ({
+    error: getContactsError(state),
+    contacts: getContacts(state),
+    pending: getContactsPending(state),
+});
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            fetchContacts: fetchContactsAction,
+        },
+        dispatch
+    );
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);
