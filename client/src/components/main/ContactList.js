@@ -1,13 +1,14 @@
 import React from "react";
 import Avatar from "./AvatarCircle";
 
-export default function ContactList() {
+export default function ContactList(props) {
+    const { fname, lname, phone } = props;
     return (
         <div
             style={{
                 display: "flex",
                 alignItems: "center",
-                margin: "5px 5px",
+                margin: "0px 5px",
             }}
         >
             <Avatar></Avatar>
@@ -18,8 +19,8 @@ export default function ContactList() {
                     marginLeft: "10px",
                 }}
             >
-                <div>Name</div>
-                <div>08123456789</div>
+                <div>{`${fname} ${lname}`}</div>
+                <div>{`${phone}`}</div>
             </div>
         </div>
     );
