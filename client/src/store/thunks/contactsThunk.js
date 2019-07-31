@@ -13,7 +13,6 @@ function fetchContacts() {
                 if (res.error) {
                     throw res.error;
                 }
-                console.log(res.data.contacts);
                 dispatch(fetchContactsSuccess(res.data.contacts));
                 return res.data.contacts;
             })
