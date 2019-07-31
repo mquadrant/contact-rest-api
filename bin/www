@@ -19,10 +19,15 @@ var http = require("http");
 const mongoose = require("mongoose");
 
 //Database Connection
-const DB = process.env.DATABASE.replace(
-    "<PASSWORD>",
-    process.env.DATABASE_PASSWORD
-);
+let DB;
+if (process.env.NODE_ENV === "production") {
+    DB = process.env.DATABASE.replace(
+        "<PASSWORD>",
+        process.env.DATABASE_PASSWORD
+    );
+} else {
+    DB = "mongodb://localhost:27017/contacts";
+}
 mongoose
     .connect(DB, {
         useNewUrlParser: true,
