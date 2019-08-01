@@ -2,7 +2,7 @@ import {
     FETCH_CONTACTS_PENDING,
     FETCH_CONTACTS_SUCCESS,
     FETCH_CONTACTS_ERROR,
-} from "./actions";
+} from "../actions";
 
 const initialState = {
     pending: false,

@@ -2,7 +2,7 @@ import {
     fetchContactsPending,
     fetchContactsSuccess,
     fetchContactsError,
-} from "./../reducers/actions";
+} from "../actions";
 
 function fetchContacts() {
     return dispatch => {
