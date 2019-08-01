@@ -18,7 +18,7 @@ const SideTrays = styled.div`
         left: 0;
     }
     .trayIcon {
-        padding: 15px 5px;
+        padding: 17px 5px;
         border-bottom: 0.5px solid #f0f0f0;
         transition: all 0.3s;
     }
@@ -33,18 +33,19 @@ const SideTrays = styled.div`
 `;
 
 const Beacon = styled.div`
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 50px;
     position: absolute;
     top: 0;
-    right: -44%;
+    right: -50%;
     color: #fff;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
-    line-height: 35px;
+    line-height: 46px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background: #039fc7;
+    border-radius: 0px 50% 50% 0;
     :hover {
         cursor: pointer;
     }
