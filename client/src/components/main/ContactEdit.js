@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import fetchContactsAction from "./../../store/thunks/contactsThunk";
+import { fetchContactsAction } from "./../../store/thunks/contactsThunk";
 import {
     getContactsPending,
     getContacts,

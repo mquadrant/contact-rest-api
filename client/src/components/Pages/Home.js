@@ -8,7 +8,10 @@ import NewPage from "./../others/NewPage";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import fetchContactsAction from "./../../store/thunks/contactsThunk";
+import {
+    fetchContactsAction,
+    selectContactsAction,
+} from "./../../store/thunks/contactsThunk";
 import {
     getContactsPending,
     getContacts,
@@ -52,7 +55,14 @@ const ListItem = styled.div`
 `;
 
 function Home(props) {
-    const { fetchContacts, contacts, pending, error } = props;
+    const {
+        fetchContacts,
+        contacts,
+        pending,
+        error,
+        contactSelected,
+        selectedStatus,
+    } = props;
     const [contact, setContact] = useState(0);
     const [selected, setSelected] = useState(false);
     useEffect(() => {
@@ -63,6 +73,7 @@ function Home(props) {
     const clickContact = id => {
         setContact(contacts.filter(contact => contact._id === id)[0]);
         setSelected(id);
+        selectedStatus();
     };
     return (
         <Container>
@@ -86,7 +97,7 @@ function Home(props) {
                 </Scroll>
             </Master>
             <Detail>
-                {contact ? (
+                {contactSelected ? (
                     <>
                         <ContactHeader></ContactHeader>
                         <ContactEdit contact={contact}></ContactEdit>
@@ -105,14 +116,24 @@ const mapStateToProps = state => ({
     error: getContactsError(state),
     contacts: getContacts(state),
     pending: getContactsPending(state),
+    contactSelected: state.contactSelect.listClick,
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             fetchContacts: fetchContactsAction,
+            selectedStatus: selectContactsAction,
         },
         dispatch
     );
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         selectedStatus: () => {
+//             dispatch(contactSelected(true));
+//         },
+//     };
+// };
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

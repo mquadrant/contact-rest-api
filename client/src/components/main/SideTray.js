@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { contactSelected } from "../../store/actions";
 
 const SideTrays = styled.div`
     position: absolute;
@@ -48,9 +50,12 @@ const Beacon = styled.div`
     }
 `;
 
-export default function SideTray(props) {
+function SideTray(props) {
+    const { selectedStatus } = props;
     const homeRoute = () => {
-        props.history.push("./");
+        props.location.pathname === "/"
+            ? selectedStatus()
+            : props.history.push("./");
     };
     const addRoute = () => {
         props.history.push("./add-contact");
@@ -78,3 +83,20 @@ export default function SideTray(props) {
         </SideTrays>
     );
 }
+
+// const mapStateToProps = state => ({
+//     error: getContactsError(state),
+//     contacts: getContacts(state),
+//     pending: getContactsPending(state),
+// });
+const mapDispatchToProps = dispatch => {
+    return {
+        selectedStatus: () => {
+            dispatch(contactSelected(false));
+        },
+    };
+};
+export default connect(
+    null,
+    mapDispatchToProps
+)(SideTray);

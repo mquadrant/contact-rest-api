@@ -2,12 +2,14 @@ import {
     FETCH_CONTACTS_PENDING,
     FETCH_CONTACTS_SUCCESS,
     FETCH_CONTACTS_ERROR,
+    CONTACT_SELECTED,
 } from "../actions";
 
 const initialState = {
     pending: false,
     contacts: [],
     error: null,
+    listClick: false,
 };
 
 export function contactReducer(state = initialState, action) {
@@ -28,6 +30,17 @@ export function contactReducer(state = initialState, action) {
                 ...state,
                 pending: false,
                 error: action.error,
+            };
+        default:
+            return state;
+    }
+}
+export function contactListReducer(state = initialState, action) {
+    switch (action.type) {
+        case CONTACT_SELECTED:
+            return {
+                ...state,
+                listClick: action.payload,
             };
         default:
             return state;

@@ -2,9 +2,10 @@ import {
     fetchContactsPending,
     fetchContactsSuccess,
     fetchContactsError,
+    contactSelected,
 } from "../actions";
 
-function fetchContacts() {
+export function fetchContactsAction() {
     return dispatch => {
         dispatch(fetchContactsPending());
         fetch("http://localhost:3200/api/v1/contacts")
@@ -21,5 +22,8 @@ function fetchContacts() {
             });
     };
 }
-
-export default fetchContacts;
+export function selectContactsAction() {
+    return dispatch => {
+        dispatch(contactSelected(true));
+    };
+}
