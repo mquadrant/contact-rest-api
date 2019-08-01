@@ -39,7 +39,7 @@ export default function NewPage() {
 
     useEffect(() => {
         if (data) {
-            const furtherSelected = differentRandomFour(data.length).map(
+            const furtherSelected = differentRandomFour(data.length - 1).map(
                 index => data[index]
             );
             setShowData(furtherSelected);
@@ -91,80 +91,73 @@ export default function NewPage() {
                             </p>
                         </OverLay>
                     </div>
-                    {showData ? (
-                        <div
-                            style={{
-                                display: "flex",
-                                margin: "10px 5px",
-                                flexWrap: "wrap",
-                                height: "230px",
-                                overflowY: "scroll",
-                            }}
-                        >
-                            {showData && data
-                                ? showData.map(datas =>
-                                      datas.urlToImage ? (
-                                          <NewBlock
+                    <div
+                        style={{
+                            display: "flex",
+                            margin: "10px 5px",
+                            flexWrap: "wrap",
+                            height: "230px",
+                            overflowY: "scroll",
+                        }}
+                    >
+                        {showData && data
+                            ? showData.map(datas => (
+                                  <NewBlock
+                                      style={{
+                                          display: "flex",
+                                          margin: "7px 10px",
+                                          flexBasis: "100%",
+                                      }}
+                                  >
+                                      <div
+                                          style={{
+                                              backgroundColor: "#039fc7",
+                                              backgroundImage: `url(${datas.urlToImage})`,
+                                              backgroundSize: "cover",
+                                              backgroundRepeat: "no-repeat",
+                                              backgroundPosition: "center",
+                                              width: "100px",
+                                              height: "100px",
+                                              marginRight: "5px",
+                                          }}
+                                      />
+
+                                      <div style={{ marginTop: "8px" }}>
+                                          {`${datas.title.substring(
+                                              0,
+                                              (datas.title + " ").lastIndexOf(
+                                                  " ",
+                                                  100
+                                              )
+                                          )}`}
+                                          <p
                                               style={{
-                                                  display: "flex",
-                                                  margin: "7px 10px",
-                                                  flexBasis: "100%",
+                                                  fontSize: "13px",
                                               }}
                                           >
-                                              <div
-                                                  style={{
-                                                      backgroundColor:
-                                                          "#039fc7",
-                                                      backgroundImage: `url(${datas.urlToImage})`,
-                                                      backgroundSize: "cover",
-                                                      backgroundRepeat:
-                                                          "no-repeat",
-                                                      backgroundPosition:
-                                                          "center",
-                                                      width: "100px",
-                                                      height: "100px",
-                                                      marginRight: "5px",
-                                                  }}
-                                              />
-
-                                              <div style={{ marginTop: "8px" }}>
-                                                  {`${datas.title.substring(
-                                                      0,
-                                                      (
-                                                          datas.title + " "
-                                                      ).lastIndexOf(" ", 100)
-                                                  )}`}
-                                                  <p
+                                              {`${datas.description.substring(
+                                                  0,
+                                                  150
+                                              )}`}
+                                              &nbsp;
+                                              <span>
+                                                  <a
+                                                      href={`${datas.url}`}
                                                       style={{
-                                                          fontSize: "13px",
+                                                          color: "#039fc7",
                                                       }}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
                                                   >
-                                                      {`${datas.description.substring(
-                                                          0,
-                                                          150
-                                                      )}`}
-                                                      &nbsp;
-                                                      <span>
-                                                          <a
-                                                              href={`${datas.url}`}
-                                                              style={{
-                                                                  color:
-                                                                      "#039fc7",
-                                                              }}
-                                                              target="_blank"
-                                                              rel="noopener noreferrer"
-                                                          >
-                                                              Read more
-                                                          </a>
-                                                      </span>
-                                                  </p>
-                                              </div>
-                                          </NewBlock>
-                                      ) : null
-                                  )
-                                : null}
-                        </div>
-                    ) : null}
+                                                      Read more
+                                                  </a>
+                                              </span>
+                                          </p>
+                                      </div>
+                                  </NewBlock>
+                              ))
+                            : null}
+                    </div>
                 </>
             ) : (
                 <div>Loading...</div>
