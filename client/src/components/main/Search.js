@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SearchCon = styled.div`
@@ -37,11 +37,27 @@ const SearchCon = styled.div`
     }
 `;
 
-export default function Search() {
+export default function Search(props) {
+    const { searching } = props;
+    const [searchValue, setSearchValue] = useState("");
+
+    const handleChange = event => {
+        setSearchValue(event.target.value);
+        searching(event.target.value);
+    };
+    const handleSubmit = event => {
+        event.preventDefault();
+    };
     return (
         <SearchCon className="search-container">
-            <form>
-                <input type="text" placeholder="Search.." name="search" />
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Search.."
+                    name="search"
+                    onChange={handleChange}
+                    value={searchValue}
+                />
                 <button type="submit">
                     <i class="fa fa-search"></i>
                 </button>

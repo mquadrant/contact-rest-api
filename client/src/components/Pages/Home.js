@@ -57,12 +57,13 @@ const ListItem = styled.div`
 function Home(props) {
     const {
         fetchContacts,
-        contacts,
+        receivedContacts,
         pending,
         error,
         contactSelected,
         selectedStatus,
     } = props;
+    const [contacts, setContacts] = useState(receivedContacts);
     const [contact, setContact] = useState(0);
     const [selected, setSelected] = useState(false);
     useEffect(() => {
@@ -70,15 +71,35 @@ function Home(props) {
         return () => {};
     }, [fetchContacts]);
 
+    useEffect(() => {
+        setContacts(receivedContacts);
+    }, [receivedContacts]);
+
     const clickContact = id => {
         setContact(contacts.filter(contact => contact._id === id)[0]);
         setSelected(id);
         selectedStatus();
     };
+
+    const searching = term => {
+        if (term !== "") {
+            setContacts(
+                receivedContacts.filter(contact => {
+                    var re = new RegExp(term, "gi");
+                    return (
+                        re.test(`${contact.first_name} ${contact.last_name}`) ||
+                        re.test(contact.phone)
+                    );
+                })
+            );
+        } else {
+            setContacts(receivedContacts);
+        }
+    };
     return (
         <Container>
             <Master>
-                <Search></Search>
+                <Search searching={searching}></Search>
                 <Scroll>
                     {contacts.map(contact => (
                         <ListItem
@@ -114,7 +135,7 @@ function Home(props) {
 
 const mapStateToProps = state => ({
     error: getContactsError(state),
-    contacts: getContacts(state),
+    receivedContacts: getContacts(state),
     pending: getContactsPending(state),
     contactSelected: state.contactSelect.listClick,
 });
