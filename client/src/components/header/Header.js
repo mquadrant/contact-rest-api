@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const header = {
-    backgroundColor: "#282c34",
+    backgroundColor: "#039fc7",
     height: "52px",
     display: "flex",
     flexDirection: "row",
