@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Search from "../main/Search";
 import ContactList from "../main/ContactList";
-import Divider from "../main/Divider";
-import AvatarCircle from "../main/AvatarCircle";
 import ContactEdit from "../main/ContactEdit";
 import Container from "./../main/Container";
 import NewPage from "./../others/NewPage";
@@ -45,9 +43,18 @@ const Scroll = styled.div`
     }
 `;
 
+const ListItem = styled.div`
+    ${props =>
+        props.selected &&
+        css`
+            background-color: #f0f0f0;
+        `}
+`;
+
 function Home(props) {
     const { fetchContacts, contacts, pending, error } = props;
     const [contact, setContact] = useState(0);
+    const [selected, setSelected] = useState(false);
     useEffect(() => {
         fetchContacts();
         return () => {};
@@ -55,6 +62,7 @@ function Home(props) {
 
     const clickContact = id => {
         setContact(contacts.filter(contact => contact._id === id)[0]);
+        setSelected(id);
     };
     return (
         <Container>
@@ -62,17 +70,18 @@ function Home(props) {
                 <Search></Search>
                 <Scroll>
                     {contacts.map(contact => (
-                        <div
+                        <ListItem
                             className="contactList"
                             id={contact._id}
                             onClick={() => clickContact(contact._id)}
+                            selected={selected === contact._id}
                         >
                             <ContactList
                                 fname={contact.first_name}
                                 lname={contact.last_name}
                                 phone={contact.phone}
                             ></ContactList>
-                        </div>
+                        </ListItem>
                     ))}
                 </Scroll>
             </Master>
